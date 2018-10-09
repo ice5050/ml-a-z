@@ -26,9 +26,10 @@ def show_report(Y, Y_pred, name_data):
 def plot_guassian(mu, sigma, idx, nclass):
     x = []
     for i in range(0, nclass):
-        x[i] = np.linspace(mu[i][idx] - 3*sigma[i][idx][idx],
-                           mu[i][idx] + 3*sigma[i][idx][idx], 100)
-        plt.plot(x[i], mlab.normpdf(x[i], mu[i][idx], sigma[i][idx][idx]))
+        a = mu[i][idx]
+        b = sigma[i][idx][idx]
+        x.append(np.linspace(a - 3*b, a + 3*b, 100))
+        plt.plot(x[i], mlab.normpdf(x[i], a, b))
         plt.show()
 
 
@@ -81,7 +82,6 @@ Y_test_pred = predict(X_test, mu, sd, nclass)
 show_report(Y_train_pred, Y, 'training')
 show_report(Y_test_pred, Y_test, 'test')
 
-
 plot_guassian(mu, sd, 0, nclass)
-# plot_guassian(mu,sd,1,nclass)
-# plot_guassian(mu,sd,2,nclass)
+plot_guassian(mu, sd, 1, nclass)
+plot_guassian(mu, sd, 2, nclass)
